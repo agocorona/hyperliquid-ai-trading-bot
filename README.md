@@ -1,159 +1,159 @@
-# Hyperliquid Trading Bot - Manual de Operación
+# Hyperliquid AI Trading Bot
 
-## Descripción del Bot
+## Bot Description
 
-Este es un bot de trading automatizado que opera en la plataforma Hyperliquid usando inteligencia artificial (DeepSeek) para generar órdenes ejecutables. El bot analiza datos de mercado en tiempo real y ejecuta órdenes de trading con gestión automática de riesgo.
+This is an automated trading bot that operates on the Hyperliquid platform using artificial intelligence (DeepSeek) to generate executable trading orders. The bot analyzes real-time market data and executes trading orders with automatic risk management.
 
-## Funcionalidades Principales
+## Key Features
 
-### ✅ Características Implementadas
-- **Generación de órdenes por IA**: DeepSeek analiza datos de mercado y genera órdenes ejecutables
-- **Integración con Hyperliquid API**: Conexión directa usando EIP-712 signing
-- **Gestión automática de leverage**: Configura el apalancamiento antes de cada orden
-- **Validación de precios**: Usa precios de referencia de Hyperliquid para evitar rechazos
-- **Cálculo dinámico de mínimos**: Calcula automáticamente los tamaños mínimos para cada asset
-- **Gestión de portfolio**: Monitorea balances y posiciones en tiempo real
+### ✅ Implemented Features
+- **AI-Generated Orders**: DeepSeek analyzes market data and generates executable orders
+- **Hyperliquid API Integration**: Direct connection using EIP-712 signing
+- **Automatic Leverage Management**: Configures leverage before each order
+- **Price Validation**: Uses Hyperliquid reference prices to avoid rejections
+- **Dynamic Minimum Calculation**: Automatically calculates minimum sizes for each asset
+- **Portfolio Management**: Monitors balances and positions in real-time
 
-### 📊 Assets Soportados
-- **BTC**: Mínimo 0.001 BTC (~$111)
-- **ETH**: Mínimo 0.001 ETH (~$4)
-- **SOL**: Mínimo 0.1 SOL (~$19)
-- **BNB**: Mínimo 0.001 BNB (~$1)
-- **ADA**: Mínimo 16.0 ADA (~$10.50)
+### 📊 Supported Assets
+- **BTC**: Minimum 0.001 BTC (~$111)
+- **ETH**: Minimum 0.001 ETH (~$4)
+- **SOL**: Minimum 0.1 SOL (~$19)
+- **BNB**: Minimum 0.001 BNB (~$1)
+- **ADA**: Minimum 16.0 ADA (~$10.50)
 
-## Archivos del Proyecto
+## Project Files
 
-### 📁 Estructura de Archivos
+### 📁 File Structure
 ```
 hyperliquid/
-├── hyperliquid_bot_executable_orders.py  # 🎯 BOT PRINCIPAL
-├── hyperliquid_minimal_order.py          # Ordenes mínimas de prueba
-├── technical_analyzer_simple.py          # Análisis técnico básico
-├── check_current_positions.py            # Verificador de posiciones
-├── close_sol_position.py                 # Cierre específico de SOL
-├── .env                                  # 🔐 Variables de entorno
-├── requirements.txt                      # Dependencias Python
-├── README.md                             # 📋 Este manual
-└── logs/                                 # 📊 Logs de ejecución
+├── hyperliquid_bot_executable_orders.py  # 🎯 MAIN BOT
+├── hyperliquid_minimal_order.py          # Minimum order tests
+├── technical_analyzer_simple.py          # Basic technical analysis
+├── check_current_positions.py            # Position checker
+├── close_sol_position.py                 # SOL position closer
+├── .env                                  # 🔐 Environment variables
+├── requirements.txt                      # Python dependencies
+├── README.md                             # 📋 This manual
+└── logs/                                 # 📊 Execution logs
 ```
 
-## Configuración y Uso
+## Setup and Usage
 
-### 🔧 Configuración Inicial
-1. **Variables de entorno** (`.env`):
+### 🔧 Initial Configuration
+1. **Environment variables** (`.env`):
    ```
-   HYPERLIQUID_PRIVATE_KEY=tu_private_key_aqui
-   DEEPSEEK_API_KEY=tu_api_key_deepseek
+   HYPERLIQUID_PRIVATE_KEY=your_hyperliquid_private_key_here
+   DEEPSEEK_API_KEY=your_deepseek_api_key_here
    ```
 
-2. **Instalación de dependencias**:
+2. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-### 🚀 Ejecución del Bot
+### 🚀 Bot Execution
 
-**Modo ciclo único (testing):**
+**Single cycle mode (testing):**
 ```bash
 python hyperliquid_bot_executable_orders.py --single-cycle
 ```
 
-**Modo continuo (producción):**
+**Continuous mode (production):**
 ```bash
 python hyperliquid_bot_executable_orders.py
 ```
 
-### 🛠️ Herramientas Auxiliares
+### 🛠️ Auxiliary Tools
 
-**Verificar posiciones actuales:**
+**Check current positions:**
 ```bash
 python check_current_positions.py
 ```
 
-**Cerrar posición específica (SOL):**
+**Close specific position (SOL):**
 ```bash
 python close_sol_position.py
 ```
 
-**Probar órdenes mínimas:**
+**Test minimum orders:**
 ```bash
 python hyperliquid_minimal_order.py
 ```
 
-## Flujo de Operación
+## Operation Flow
 
-### 🔄 Ciclo de Trading
-1. **Recolección de datos**: Obtiene precios en tiempo real de Binance API
-2. **Análisis por IA**: DeepSeek genera órdenes ejecutables basadas en datos de mercado
-3. **Validación**: Verifica balances, mínimos y condiciones de mercado
-4. **Configuración de leverage**: Establece apalancamiento antes de cada orden
-5. **Ejecución**: Envía órdenes a Hyperliquid usando EIP-712 signing
-6. **Monitoreo**: Registra resultados y actualiza estado del portfolio
+### 🔄 Trading Cycle
+1. **Data Collection**: Gets real-time prices from Binance API
+2. **AI Analysis**: DeepSeek generates executable orders based on market data
+3. **Validation**: Verifies balances, minimums and market conditions
+4. **Leverage Configuration**: Sets leverage before each order
+5. **Execution**: Sends orders to Hyperliquid using EIP-712 signing
+6. **Monitoring**: Records results and updates portfolio status
 
-### ⚙️ Parámetros de Orden
-Cada orden generada por la IA incluye:
-- **Acción**: buy, sell, hold, close_position
-- **Tamaño**: Cantidad exacta en unidades del asset
-- **Leverage**: Multiplicador de apalancamiento (1-25x)
-- **Confianza**: Score de 0.1-1.0
-- **Razonamiento**: Justificación detallada de la decisión
+### ⚙️ Order Parameters
+Each AI-generated order includes:
+- **Action**: buy, sell, hold, close_position
+- **Size**: Exact quantity in asset units
+- **Leverage**: Leverage multiplier (1-25x)
+- **Confidence**: Confidence score (0.1-1.0)
+- **Reasoning**: Detailed decision justification
 
-## Gestión de Riesgo
+## Risk Management
 
-### 🛡️ Mecanismos de Protección
-- **Validación de mínimos**: Asegura que todas las órdenes cumplan con los requisitos de Hyperliquid
-- **Cálculo de margen**: Verifica disponibilidad de fondos antes de ejecutar
-- **Límites de leverage**: Usa máximo permitido por Hyperliquid para cada asset
-- **Precisión de precios**: Ajusta a tick sizes específicos de cada asset
+### 🛡️ Protection Mechanisms
+- **Minimum Validation**: Ensures all orders meet Hyperliquid requirements
+- **Margin Calculation**: Verifies fund availability before execution
+- **Leverage Limits**: Uses maximum allowed by Hyperliquid for each asset
+- **Price Precision**: Adjusts to specific tick sizes for each asset
 
-### 📈 Mínimos por Asset
-| Asset | Mínimo | Valor Aprox. |
-|-------|--------|--------------|
+### 📈 Minimums by Asset
+| Asset | Minimum | Approx. Value |
+|-------|---------|---------------|
 | BTC | 0.001 | $111 |
 | ETH | 0.001 | $4 |
 | SOL | 0.1 | $19 |
 | BNB | 0.001 | $1 |
 | ADA | 16.0 | $10.50 |
 
-## Solución de Problemas
+## Troubleshooting
 
-### 🔍 Problemas Comunes Resueltos
+### 🔍 Common Problems Solved
 
 1. **"Order price cannot be more than 95% away from reference price"**
-   - ✅ Solucionado: Usa precios de referencia de Hyperliquid API
+   - ✅ Solved: Uses Hyperliquid API reference prices
 
 2. **"User or API Wallet does not exist" (ADA)**
-   - ✅ Solucionado: Implementación unificada de EIP-712 para todos los assets
+   - ✅ Solved: Unified EIP-712 implementation for all assets
 
-3. **Función de leverage no se ejecuta**
-   - ✅ Solucionado: Llamada automática antes de cada orden
+3. **Leverage function not executing**
+   - ✅ Solved: Automatic call before each order
 
-4. **Mínimos incorrectos para ADA**
-   - ✅ Solucionado: Cálculo dinámico basado en precio actual (16.0 ADA = $10.50)
+4. **Incorrect minimums for ADA**
+   - ✅ Solved: Dynamic calculation based on current price (16.0 ADA = $10.50)
 
-### 📋 Verificación de Estado
-- Revisar logs en `logs/hyperliquid_bot_executable.log`
-- Verificar balances con `check_current_positions.py`
-- Monitorear ejecuciones en tiempo real
+### 📋 Status Verification
+- Check logs in `logs/hyperliquid_bot_executable.log`
+- Verify balances with `check_current_positions.py`
+- Monitor executions in real-time
 
-## Consideraciones Técnicas
+## Technical Considerations
 
-### 🔐 Seguridad
-- Las private keys se almacenan solo en `.env`
-- Comunicación HTTPS con todas las APIs
-- Firma EIP-712 para autenticación en Hyperliquid
+### 🔐 Security
+- Private keys stored only in `.env`
+- HTTPS communication with all APIs
+- EIP-712 signing for Hyperliquid authentication
 
 ### 📊 Performance
-- Tiempo de ciclo: ~30-45 segundos
-- Actualización de precios en tiempo real
-- Gestión eficiente de conexiones API
+- Cycle time: ~30-45 seconds
+- Real-time price updates
+- Efficient API connection management
 
-### 🎯 Precisión
-- Tick sizes dinámicos basados en precios de mercado
-- Redondeo automático a precisiones requeridas
-- Validación cruzada de datos entre múltiples fuentes
+### 🎯 Precision
+- Dynamic tick sizes based on market prices
+- Automatic rounding to required precisions
+- Cross-validation of data between multiple sources
 
 ---
 
-**Estado Actual**: ✅ OPERATIVO - Todas las funcionalidades funcionando correctamente
-**Última Actualización**: 25 Octubre 2025
+**Current Status**: ✅ OPERATIONAL - All features working correctly
+**Last Updated**: October 25, 2025
